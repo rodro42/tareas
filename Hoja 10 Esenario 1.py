@@ -1,44 +1,45 @@
-from collections import Counter
+n = int(input("Ingrese la cantidad de clientes: "))
+p = n
+lista = []
+promedio = 0
+uno, dos, tres, cuatro, cinco = 0, 0, 0, 0, 0
+suma = 0
 
-def registrar_respuestas(n):
-    respuestas = []
-    for i in range(n):
-        while True:
-            try:
-                respuesta = int(input(f"Ingresa la respuesta del cliente {i+1} (1 a 5): "))
-                if respuesta < 1 or respuesta > 5:
-                    print("Respuesta inválida, debe ser un número entre 1 y 5.")
-                else:
-                    respuestas.append(respuesta)
-                    break
-            except ValueError:
-                print("Por favor ingresa un número válido entre 1 y 5.")
-    return respuestas
+while n != 0:
+    nota = int(input("Ingrese la calificación (1-5): "))
+    if nota < 1 or nota > 5:
+        print("Calificación inválida, debe ser entre 1 y 5.")
+        continue
+    lista.append(nota)
+    suma += nota
+    if nota == 1:
+        uno += 1
+    elif nota == 2:
+        dos += 1
+    elif nota == 3:
+        tres += 1
+    elif nota == 4:
+        cuatro += 1
+    elif nota == 5:
+        cinco += 1
+    n -= 1
 
-def tabular_respuestas(respuestas):
-    conteo = Counter(respuestas)
-    tipos_respuesta = {
-        5: "Excelente",
-        4: "Muy Buena",
-        3: "Buena",
-        2: "Regular",
-        1: "Malo"
-    }
+promedio = suma / p
+menor_al_promedio = sum(1 for x in lista if x < promedio)
 
-    print("\nRespuestas:")
-    for i in range(1, 6):
-        print(f"{tipos_respuesta[i]}: {conteo[i]}")
+print("\nRespuestas:")
+print(f"Excelente: {cinco}")
+print(f"Muy Buena: {cuatro}")
+print(f"Buena: {tres}")
+print(f"Regular: {dos}")
+print(f"Malo: {uno}")
 
-    respuesta_frecuente = conteo.most_common(1)[0][0]
-    print(f"\nLa respuesta más frecuente es: {respuesta_frecuente}")
+print(f"\nPromedio: {promedio:.2f}")
 
-    promedio = sum(respuestas) / len(respuestas)
-    print(f"\nPromedio de respuestas: {promedio:.2f}")
+frecuencias = {1: uno, 2: dos, 3: tres, 4: cuatro, 5: cinco}
+max_respuesta = max(frecuencias, key=frecuencias.get)
+print(f"\nLa respuesta más frecuente es: {max_respuesta}")
 
-    menor_promedio = [i+1 for i, r in enumerate(respuestas) if r < promedio]
-    porcentaje_menor_promedio = (len(menor_promedio) / len(respuestas)) * 100
-    print(f"Porcentaje de clientes con respuestas menores al promedio: {porcentaje_menor_promedio:.2f}%")
+porcentaje_menor_al_promedio = (menor_al_promedio / p) * 100
+print(f"\nPorcentaje de clientes con calificaciones menores al promedio: {porcentaje_menor_al_promedio:.2f}%")
 
-n = int(input("Ingresa el número de clientes atendidos: "))
-respuestas = registrar_respuestas(n)
-tabular_respuestas(respuestas)
