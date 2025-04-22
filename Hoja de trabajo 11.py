@@ -8,7 +8,7 @@ promedio = suma / len(numeros)
 print("Promedio:", promedio)
 
 # Ejercicio 2: Encontrar el mayor número
-print("\nEjercicio 2: Encontrar el mayor número")
+print("Ejercicio 2: Encontrar el mayor número")
 numeros = [12, 45, 7, 89, 23]
 mayor = numeros[0]
 for n in numeros:
@@ -17,7 +17,7 @@ for n in numeros:
 print("Mayor número:", mayor)
 
 # Ejercicio 3: Contar cuántos son pares
-print("\nEjercicio 3: Contar cuántos son pares")
+print("Ejercicio 3: Contar cuántos son pares")
 numeros = [1, 4, 7, 8, 10, 3]
 pares = 0
 for n in numeros:
